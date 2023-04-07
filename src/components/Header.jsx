@@ -1,0 +1,24 @@
+import { Link } from "react-router-dom"
+import { LogoutNav } from "./LogoutNav";
+import { LoginNav } from "./LoginNav";
+import { isLoggedInAtom, userAtom } from '../atom'
+import { useRecoilValue } from "recoil";
+const Header = ()=>{
+
+    const isLoggedIn = useRecoilValue(isLoggedInAtom)
+
+    return(
+        <nav className="flex justify-between px-10 py-5 border-b border-black">
+                <div className="text-black underline-none">
+                    <Link to="/">Home</Link>
+                </div>
+                <ul className="flex">
+                    {
+                        isLoggedIn ? <LoginNav/> : <LogoutNav/>
+                    }
+                </ul>
+        </nav>
+    )
+}
+
+export { Header };

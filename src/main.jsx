@@ -1,0 +1,54 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { RecoilRoot } from 'recoil';
+import './index.css'
+import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+import { Root } from './routes/root'
+import { Login } from './routes/login'
+import { Register } from './routes/register'
+import { ErrorPage } from './routes/error-page'
+import { MyPage } from './routes/my-page';
+import { DashBoard } from './routes/dashboard';
+import { Article } from './routes/article';
+import { Profile } from './routes/profile';
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root/>,
+    errorElement: <ErrorPage/>,
+    children: [
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
+      },
+      {
+        path: '/dashboard',
+        element: <DashBoard/>
+      },
+      {
+        path: '/mypage',
+        element: <MyPage/>
+      },
+      {
+        path: '/profile',
+        element: <Profile/>
+      },
+      {
+        path: '/article',
+        element: <Article/>
+      },
+    ]
+  }
+])
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <RecoilRoot>
+      <RouterProvider router={router} />
+    </RecoilRoot>
+  </React.StrictMode>,
+)

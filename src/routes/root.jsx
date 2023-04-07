@@ -1,0 +1,56 @@
+import  { Header } from '../components/Header'
+import { Footer } from '../components/Footer';
+import { Outlet, useNavigate } from 'react-router';
+import { useEffect } from 'react';
+import { getUser } from '../api/users';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { isLoggedInAtom,userAtom } from '../atom';
+import { SideBar } from '../components/SideBar';
+const Root = ()=>{
+    /**
+     * 로그인 상태
+     */
+    const setIsLoggedIn = useSetRecoilState(isLoggedInAtom);
+    /**
+     * 사용자 상태
+     */
+    const setUser = useSetRecoilState(userAtom);
+
+    const navigate = useNavigate();
+
+    /**
+     * 초기화 
+     */
+    useEffect(()=>{
+        const init = async()=>{
+            const hasToken = !!localStorage.getItem('jwtToken')
+            if(!hasToken)return;
+            try {
+                const { data } =await getUser();
+                setIsLoggedIn(true)
+                setUser(data.user)
+                navigate('/dashboard',{replace:true})
+            } catch (error) {
+            }
+        }
+        init();
+    },[setIsLoggedIn,setUser])
+
+    return (
+        <>
+            <Header/>
+            <div className="grid grid-cols-4 min-h-screen">
+                <div className="border-r bg-white border-black px-10 py-5">
+                    <SideBar/>  
+                </div>
+                <div className="col-span-3">
+                    <Outlet/>
+                </div>
+            </div>
+            <Footer/>
+        </>
+    )
+}
+
+export { Root };
+
