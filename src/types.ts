@@ -14,6 +14,14 @@ export interface User{
     bio?: string
 }
 
+export interface Article{
+    title: string;
+    description: string;
+    body: string;
+    tagList? : string[];
+}
+
+
 export interface ArticleProps{
     slug: string,
     title: string,

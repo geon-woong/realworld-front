@@ -18,6 +18,7 @@ const Root = ()=>{
 
     const navigate = useNavigate();
 
+    const currentPath = window.location.pathname;
     /**
      * 초기화 
      */
@@ -29,7 +30,7 @@ const Root = ()=>{
                 const { data } =await getUser();
                 setIsLoggedIn(true)
                 setUser(data.user)
-                navigate('/dashboard',{replace:true})
+                // navigate('/dashboard',{replace:true})
             } catch (error) {
             }
         }
@@ -44,7 +45,12 @@ const Root = ()=>{
                     <SideBar/>  
                 </div>
                 <div className="col-span-3">
-                    <Outlet/>
+                    {
+                        currentPath === '/' ?
+                        <p>
+                        </p> :
+                        <Outlet/>
+                    }
                 </div>
             </div>
             <Footer/>

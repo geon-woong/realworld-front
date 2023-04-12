@@ -42,7 +42,7 @@ useEffect(() => {
 
     return(
         <div>
-           <Feed query={queryList[toggle]} url='/' limit={10} />
+           <Feed query={queryList[toggle]} url='/dashboard' limit={10} />
         </div>
     )
 }

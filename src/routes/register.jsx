@@ -50,14 +50,14 @@ const Register = ()=>{
     },[isLoggedIn,navigate])
 
     return (
-        <div className="mx-auto grid justify-center  bg-gray-100  w-96 rounded-xl">
-        <h1 className="text-center my-5">회원가입</h1>
+        <div className="form-container">
+        <h1 className="page-title">Join</h1>
             <form  onSubmit={(event)=>onSubmit(event)}>
-                <div className="grid gap-y-3 mb-5">
+                <div className="grid gap-y-5 mb-5">
                 <input onChange={onChange} type="text" name="username" placeholder="이름" />
                 <input onChange={onChange} type="email" name="email" placeholder="아이디" />
                 <input onChange={onChange} type="password" name="password" placeholder="비밀번호" />
-                <button type="submit"  className="p-2 border rounded-xl bg-gray-700 text-white">가입</button>
+                <button type="submit"  className="p-2 border rounded-xl bg-gray-700 text-white">join</button>
                 </div>
             </form>
         </div>

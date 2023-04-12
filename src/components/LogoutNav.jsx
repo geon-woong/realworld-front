@@ -5,10 +5,10 @@ const LogoutNav = ()=>{
     return(
         <>
             <li>
-                <NavLink to="/login">로그인</NavLink>
+                <NavLink to="/login">Sign In</NavLink>
             </li>
             <li>
-                <NavLink to="/register">가입</NavLink>
+                <NavLink to="/register">Sign Up</NavLink>
             </li>
         </>
     )

@@ -12,7 +12,7 @@ const Header = ()=>{
                 <div className="text-black underline-none">
                     <Link to="/">Home</Link>
                 </div>
-                <ul className="flex">
+                <ul className="flex gap-3">
                     {
                         isLoggedIn ? <LoginNav/> : <LogoutNav/>
                     }

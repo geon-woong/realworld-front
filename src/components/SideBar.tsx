@@ -7,25 +7,27 @@ export const SideBar = () =>{
     const setToggle =useSetRecoilState(feedToggle)
     return (
         <>
+            
             <Link
              to="/dashboard"
              onClick={
-                 (e)=>{
-                     e.preventDefault()
-                     setToggle(1)
-                 }
+                 ()=> setToggle(1)
              }
              >
                See All
             </Link>
             {
                 isLoggedIn &&
-                <Link 
-                to="/dashboard" 
-                onClick={(e)=>{
-                    e.preventDefault()
-                    setToggle(0)
-                }}>My Feed</Link>}
+                <>  
+                    <Link 
+                    to="/dashboard" 
+                    onClick={()=>setToggle(0)
+                    }>My Feed</Link>
+                    <Link to="/create">
+                    Write
+                    </Link>
+                </>
+                }
         </>
     )
 }

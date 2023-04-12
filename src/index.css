@@ -10,3 +10,34 @@ input{
 a{
     display: block;
 }
+
+button[type="submit"]{
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+}
+
+input{
+    border: solid rgba(0, 0, 0, 0.5);
+    border-radius: 0.2rem;
+}
+
+form{
+    display: grid;
+    grid-gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.page-title{
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-container{
+    display: grid;
+    justify-content: center;
+    padding: 2rem;
+}

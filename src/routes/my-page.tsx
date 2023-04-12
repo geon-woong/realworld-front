@@ -53,16 +53,14 @@ export const MyPage =()=>{
     
 
     return(
-        <div className="mx-auto grid justify-center  bg-gray-100  w-96 rounded-xl">
-        <h1 className="text-center my-5">마이페이지</h1>
+        <div className="form-container">
+        <h1 className="page-title">Edit My Info</h1>
                 <form onSubmit={onSubmit} >
-                <div className="grid gap-y-3 mb-5">
-                    <input onChange={onChange} value={email} type="email" name="email" placeholder="아이디" />
-                    <input onChange={onChange} value={username} type="text" name="username" placeholder="이름" />
-                    <input onChange={onChange} value={bio || ''} type="textarea" name="bio" placeholder="당신에 대해 알려주세요" className="min-h-[50px]" />
-                    <input onChange={onChange} value={password} type="password" name="password" placeholder="비밀번호" />
-                    <button type="submit" className="p-2 border rounded-xl bg-gray-700 text-white">수정</button>
-                    </div>
+                    <input onChange={onChange} value={email} type="email" name="email" placeholder="ID" />
+                    <input onChange={onChange} value={username} type="text" name="username" placeholder="put your name" />
+                    <input onChange={onChange} value={bio || ''} type="textarea" name="bio" placeholder="bio" className="min-h-[50px]" />
+                    <input onChange={onChange} value={password} type="password" name="password" placeholder="password" />
+                    <button type="submit" >submit</button>
                 </form>
         </div>
     )

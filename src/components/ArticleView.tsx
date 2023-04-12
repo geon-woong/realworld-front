@@ -1,12 +1,22 @@
-
+import { Link } from "react-router-dom";
+import { Author } from "./Author";
+import { TimeStamp } from "./TimeStamp";
 export const ArticleView = ({article})=>{
-    const { title, description, body, author, createdAt  } = article;
+    const { slug, title, description, body, author, createdAt  } = article;
+    const { username } = author;
     return(
         <div className="p-5">
-            {/* autho.image 이미지와 이름에 프로필 링크  */}
-            <p className="text-sm font-bold">{ author.username } <span className="font-thin text-gray-400">{createdAt}</span> </p>
-            <h1 className="font-semibold text-lg"> { title } </h1>
+            <Link to={`/profile/${username}`} className="font-semibold inline-block hover:underline">
+                <Author author={author} />
+            </Link>
+            <Link to={`/article/${slug}`}>
+                <h1 className="text-lg font-semibold hover:underline"> { title } </h1>
+            </Link>
             <p className="text-gray-400 text-sm"> { description } </p>
+            <div className="flex justify-between">
+                <TimeStamp createdAt={createdAt} />
+                <Link to="/article" className="text-xs underline text-right">Read more</Link>
+            </div>
         </div>
     )
 }

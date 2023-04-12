@@ -45,14 +45,12 @@ const Login =()=>{
 
     return(
         <>
-            <div className="mx-auto grid justify-center  bg-gray-100  w-96 rounded-xl">
-                <h1 className="text-center my-5">로그인</h1>
+            <div className="form-container">
+                <h1 className="page-title">Sign In</h1>
                 <form onSubmit={(event) => onSubmit(event)}>
-                    <div className="grid gap-y-3 mb-5">
                     <input onChange={onChange} type="email" name="email" placeholder="아이디" />
                     <input onChange={onChange} type="password" name="password" placeholder="비밀번호" />
-                    <button type="submit" className="p-2 border rounded-xl bg-gray-700 text-white">로그인</button>
-                    </div>
+                    <button type="submit">sign in</button>
                 </form>
             </div>
         </>

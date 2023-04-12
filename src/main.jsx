@@ -10,7 +10,9 @@ import { ErrorPage } from './routes/error-page'
 import { MyPage } from './routes/my-page';
 import { DashBoard } from './routes/dashboard';
 import { Article } from './routes/article';
+import { CreateArticle } from './routes/createArticle';
 import { Profile } from './routes/profile';
+import { EditArticle } from './routes/editArticle';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -34,12 +36,20 @@ const router = createBrowserRouter([
         element: <MyPage/>
       },
       {
-        path: '/profile',
+        path: '/profile/:username',
         element: <Profile/>
       },
       {
-        path: '/article',
-        element: <Article/>
+        path: `/article/:slug`,
+        element: <Article/>,
+      },
+      {
+        path: '/edit/:slug',
+        element: <EditArticle/>,
+      },
+      {
+        path: '/create',
+        element: <CreateArticle/>,
       },
     ]
   }

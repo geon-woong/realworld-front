@@ -18,9 +18,7 @@ const LoginNav = ()=>{
     return(
         <>
             <li>
-                <p className="truncate">
-                    <Link to="/mypage" className=" px-2">MyPage</Link>
-                </p>
+                <Link to="/mypage" className=" px-2 truncate">MyPage</Link>
             </li>
             <li>
                 <button onClick={onLogout}>Log Out</button>

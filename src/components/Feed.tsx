@@ -4,6 +4,7 @@ import { getArticles } from '../api/article';
 import { pageAtom } from '../atom';
 import { ArticleProps } from '../types';
 import { ArticleView } from './ArticleView';
+import { Pagenation } from './Pagination';
 
 /**
  * 피드 프롭스 인터페이스
@@ -20,7 +21,7 @@ export const Feed = ({url,limit,query}:FeedProps) => {
     
     const initFeed = async() =>{
         const { data } = await getArticles(
-            `${query}limit=${limit}`
+            `${query}limit=${limit}&offset=${10 * (page - 1)}`
             );
         setArticles(data.articles);
         setArticlesCount(data.articlesCount);
@@ -29,11 +30,11 @@ export const Feed = ({url,limit,query}:FeedProps) => {
     useEffect(() => {
         initFeed();
         
-    }, [url,limit,query])
+    }, [page,limit,query])
 
     return (
         <div 
-            className={articles.length < 1 && 'p-5'}
+            className={articles.length < 1 ? 'p-5' : undefined}
         >
             {
                 articles.length < 1 && "No article Yet . . "
@@ -41,6 +42,8 @@ export const Feed = ({url,limit,query}:FeedProps) => {
             {articles.map((article)=>(
                 <ArticleView article={article} key={article.slug} />
             ))}
+            {/* 페이지네이션 */}
+            <Pagenation articlesCount={articlesCount} url={url} />
         </div>
     )
 }

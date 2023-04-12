@@ -41,7 +41,7 @@ const POST = (url: string, body? : {}, config? : {})=>instance.post(url,body,con
 
 const PUT = (url: string,body? : {}, config? : {})=> instance.put(url,body,config)
 
-const DELETE = (url: string, config:{})=> instance.delete(url,config)
+const DELETE = (url: string, config? :{})=> instance.delete(url,config)
 
 export { 
     GET,
