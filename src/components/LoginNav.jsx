@@ -1,20 +1,18 @@
-import { Link } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { Link, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { userAtom,isLoggedInAtom } from "../atom";
 
 const LoginNav = ()=>{
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom);
     const [user, setUser] = useRecoilState(userAtom);
-
-    const onLogout =(event)=>{
-        event.preventDefault();
-        setIsLoggedIn(false)
-        setUser({ email: '', username: '', bio: '', image: '' });
+    const navigate = useNavigate()
+    const onLogout = ()=>{
+        setIsLoggedIn(false);
         localStorage.removeItem('jwtToken');
-        
-
+        setUser({ email: '', username: '', bio: '', image: '' });
+        navigate('/',{replace:true})
     }
+    
     return(
         <>
             <li>

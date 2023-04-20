@@ -33,3 +33,13 @@ export const removeArticle = ( slug:string ) => DELETE(`/articles/${slug}`);
  * @param body
  */
 export const editArticle = ( slug:string , body: { article: Article}) => PUT(`/articles/${slug}`,body);
+
+/**
+ * favorite article
+ */
+export const favoriteArticle = ( slug : string ) => POST(`/articles/${slug}/favorite`)
+
+/**
+ * unfavorite article
+ */
+export const unfavoriteArticle = ( slug : string ) => DELETE(`/articles/${slug}/favorite`)

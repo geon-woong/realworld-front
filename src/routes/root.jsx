@@ -11,6 +11,8 @@ const Root = ()=>{
      * 로그인 상태
      */
     const setIsLoggedIn = useSetRecoilState(isLoggedInAtom);
+
+    const isLoggedIn = useRecoilValue(isLoggedInAtom)
     /**
      * 사용자 상태
      */
@@ -27,10 +29,9 @@ const Root = ()=>{
             const hasToken = !!localStorage.getItem('jwtToken')
             if(!hasToken)return;
             try {
-                const { data } =await getUser();
+                const { user } = await getUser();
                 setIsLoggedIn(true)
-                setUser(data.user)
-                // navigate('/dashboard',{replace:true})
+                setUser(user)
             } catch (error) {
             }
         }
@@ -48,6 +49,7 @@ const Root = ()=>{
                     {
                         currentPath === '/' ?
                         <p>
+                            {isLoggedIn}
                         </p> :
                         <Outlet/>
                     }

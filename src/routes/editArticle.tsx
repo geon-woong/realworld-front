@@ -12,8 +12,8 @@ export const EditArticle = ()=>{
     useEffect(()=>{
         const initArticle = async() => {
             try {
-                const { data } = await getArticle(slug);
-                 setArticle(data.article)
+                const { article } = await getArticle(slug);
+                 setArticle(article)
             } catch (error) {
             }
         }
@@ -29,7 +29,6 @@ export const EditArticle = ()=>{
                 body : body,
             }
         })
-        console.log(data)
     }
     const onChange = (event)=>{
         const { name, value } = event.target;

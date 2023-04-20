@@ -14,7 +14,7 @@ export const MyPage =()=>{
     })
     const { email, username, bio, password} = myInfo;
     const [user, setUser] = useRecoilState(userAtom);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const onChange =(event)=>{
         const { value,name } = event.target 
@@ -35,12 +35,11 @@ export const MyPage =()=>{
                 bio: bio
             }
         })
-        console.log(data)
         setUser(data.user)
     }
 
     useEffect(() => {
-        if(!isLoggedIn) navigate('/login',{replace:true})
+        
         const initMy = ()=>{
             setMyInfo({
                 ...user,
@@ -48,8 +47,9 @@ export const MyPage =()=>{
             })
         }
         initMy()
+        // if (!isLoggedIn) navigate('/', { replace: true });
     }, [user])
-
+    
     
 
     return(

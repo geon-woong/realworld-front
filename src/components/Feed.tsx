@@ -1,10 +1,11 @@
 import { useState,useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { getArticles } from '../api/article';
-import { pageAtom } from '../atom';
+import { isLoggedInAtom, pageAtom } from '../atom';
 import { ArticleProps } from '../types';
 import { ArticleView } from './ArticleView';
 import { Pagenation } from './Pagination';
+import { Skeleton } from './Skeleton';
 
 /**
  * 피드 프롭스 인터페이스
@@ -15,16 +16,19 @@ interface FeedProps{
     query:string,
 }
 export const Feed = ({url,limit,query}:FeedProps) => {
+    const isLoggedIn = useRecoilValue(isLoggedInAtom)
     const [articles,setArticles] = useState<ArticleProps[]>([])
     const [articlesCount, setArticlesCount] = useState(0);
     const [page,setPage] = useRecoilState(pageAtom)
-    
+    const [isLoading, setIsLoading] = useState(true);
+
     const initFeed = async() =>{
-        const { data } = await getArticles(
+        const { articles } = await getArticles(
             `${query}limit=${limit}&offset=${10 * (page - 1)}`
             );
-        setArticles(data.articles);
-        setArticlesCount(data.articlesCount);
+        setArticles(articles);
+        setArticlesCount(articlesCount);
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -37,12 +41,12 @@ export const Feed = ({url,limit,query}:FeedProps) => {
             className={articles.length < 1 ? 'p-5' : undefined}
         >
             {
-                articles.length < 1 && "No article Yet . . "
+                isLoading  ?
+                <Skeleton height="min-h-screen"/> 
+                :articles.map((article)=>(
+                <ArticleView  article={article} key={article.slug} />
+                ))
             }
-            {articles.map((article)=>(
-                <ArticleView article={article} key={article.slug} />
-            ))}
-            {/* 페이지네이션 */}
             <Pagenation articlesCount={articlesCount} url={url} />
         </div>
     )

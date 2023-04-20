@@ -38,7 +38,7 @@ const isLoggedIn = useRecoilValue(isLoggedInAtom);
 
 useEffect(() => {
     // getTags();
-}, [])
+}, [isLoggedIn])
 
     return(
         <div>

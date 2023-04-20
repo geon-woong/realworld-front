@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { createNewArticle } from "../api/article";
-import { Article } from "../types";
 import { useNavigate } from "react-router";
+import { useRecoilValue } from "recoil";
+import { isLoggedInAtom } from "../atom";
 export const CreateArticle = ()=>{
+    const isLoggedIn = useRecoilValue(isLoggedInAtom);
     const navigate = useNavigate();
     const [newArticle, setNewArticle] = useState({
         title: '',
@@ -22,14 +24,18 @@ export const CreateArticle = ()=>{
     const onSubmit = async(event) =>{
         event.preventDefault();
         try {
-            await createNewArticle({
-                 article : newArticle
-             })
+            await createNewArticle({article:newArticle})
              navigate('/dashboard',{replace:true});
         } catch (error) {
             
         }
     }
+
+    useEffect(()=>{
+        if(!isLoggedIn){
+           navigate('/')
+        }
+    },[])
 
     return(
         <div className="form-container">

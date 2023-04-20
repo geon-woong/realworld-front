@@ -1,42 +1,53 @@
 import { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUser } from "../api/users";
 import { isLoggedInAtom,userAtom } from "../atom";
 
+import { useForm } from "react-hook-form";
+
 const Login =()=>{
-    const navigate = useNavigate();
-    const [loginInfo, setLoginInfo] = useState({
-        email: '',
-        password: ''
+
+    interface Ilogin{
+        email: string,
+        password: string,
+    }
+    /**
+     * react-hook-form
+     */
+    const { register, handleSubmit,formState:{errors} } = useForm({
+        defaultValues:{
+            email:'',
+            password:''
+        }
     })
-    const { email, password } = loginInfo;
+    const navigate = useNavigate();
+    
     const [error, setError] = useState({
-        email: '',
-        password: '',
+        emailOrPwd: '',
     })
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom)
     const [user, setUser] = useRecoilState(userAtom);
-    const onChange =(event: React.ChangeEvent<HTMLInputElement>)=>{
-        const { name,value } = event.target;
-        setLoginInfo({
-            ...loginInfo,
-            [name]: value,
-        })
-    }
+    
 
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-          const { data } = await loginUser({
-              user: {
-                  email: email,
-                  password: password,
-              },
-          });
-        setIsLoggedIn(true);
-        setUser(data.user)
-        navigate('/dashboard',{ replace: true })
-        localStorage.setItem('jwtToken', data.user.token);
+    const onSubmit = async (data :Ilogin) => {
+        try {
+            const { user } = await loginUser({
+                user: {
+                    email: data.email,
+                    password: data.password,
+                },
+            });
+            localStorage.setItem('jwtToken', user.token);
+            setIsLoggedIn(true);
+            setUser(user)
+            navigate('/'),{replace:true}
+        } catch (error) {
+            const errorMessage = error.response.data.errors
+            setError({
+                emailOrPwd: errorMessage['email or password'],
+            })
+        }
       };
     
       useEffect(()=>{
@@ -47,11 +58,15 @@ const Login =()=>{
         <>
             <div className="form-container">
                 <h1 className="page-title">Sign In</h1>
-                <form onSubmit={(event) => onSubmit(event)}>
-                    <input onChange={onChange} type="email" name="email" placeholder="아이디" />
-                    <input onChange={onChange} type="password" name="password" placeholder="비밀번호" />
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <input {...register("email",{required: "email is required"})} type="email" name="email" placeholder="email" />
+                    <p className="text-xs text-red-600 font-semibold">{errors.email?.message}</p>
+                    <input {...register("password",{required: "password is required"})} type="password" name="password" placeholder="password" />
+                    <p className="text-xs text-red-600 font-semibold">{errors.password?.message}</p>
+                    <p className="text-xs text-red-600 font-semibold">{ error.emailOrPwd && `email or password is invalid`}</p>
                     <button type="submit">sign in</button>
                 </form>
+                <Link to="/register" className="text-center pointer text-gray-300 underline">need account?</Link>
             </div>
         </>
     )

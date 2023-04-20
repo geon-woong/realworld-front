@@ -10,7 +10,7 @@ export const Author = ({author}) => {
     return (
         <div className="flex gap-2">
             <img src={author.image} alt="profile-image" className="rounded-full w-8 h-8" />
-            <p >{author.username}</p>
+            <p className="leading-[2rem]" >{author.username}</p>
         </div>
     )
 }

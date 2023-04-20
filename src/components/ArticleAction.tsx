@@ -1,6 +1,8 @@
 import { useNavigate,useParams } from "react-router"
+import { FavoriteButton } from "./FavoriteButton";
+import { FollowButton } from "./FollowButton";
 
-export const ArticleAction = ({isUser,slug,removeArticle,follow,unFollow,favorite,unFavorite}) =>{
+export const ArticleAction = ({isUser,slug,removeArticle,author,favorited,favoritesCount}) =>{
     const navigate = useNavigate();
     return(
         <div className="flex justify-end text-sm gap-1">
@@ -22,8 +24,8 @@ export const ArticleAction = ({isUser,slug,removeArticle,follow,unFollow,favorit
                     <p>{isUser}</p>
                 </>
             }
-            <button>Follow </button>
-            <button>Favorite </button>
+            <FollowButton username={author.username} following={author.following} />
+            <FavoriteButton  slug={slug} favorite={favorited} favoritesCount={favoritesCount} />
         </div>
     )
 }
