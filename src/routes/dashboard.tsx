@@ -1,8 +1,8 @@
 import { useState,useEffect,useMemo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { getArticleTags } from "../api/article";
-import { feedToggle, isLoggedInAtom } from "../atom";
-import { SideBar } from "../components/SideBar";
+import { feedTag, feedToggle, isLoggedInAtom } from "../atom";
+import { TagsList } from "../components/TagsList";
 import { Feed } from "../components/Feed";
 export const DashBoard = ()=>{
 /**
@@ -20,13 +20,13 @@ const isLoggedIn = useRecoilValue(isLoggedInAtom);
  /**
   * 태그명
   */
- const [tagNm,setTagNm] = useState('')
+ const tag = useRecoilValue(feedTag);
  /**
   * 피드 쿼리 리스트
   */
  const queryList = useMemo(
-     () => ['/feed?','?',`?tag=${tagNm}&`],
-     [tagNm]
+     () => ['/feed?','?',`?tag=${tag}&`],
+     [tag]
      )
 /**
  * 태그 목록 불러오기
@@ -37,12 +37,13 @@ const isLoggedIn = useRecoilValue(isLoggedInAtom);
 }
 
 useEffect(() => {
-    // getTags();
+    getTags();
 }, [isLoggedIn])
 
     return(
-        <div>
-           <Feed query={queryList[toggle]} url='/dashboard' limit={10} />
-        </div>
+        <>
+            <TagsList tagList={tagList} clickable={true}  />
+            <Feed query={queryList[toggle]} url='/dashboard' limit={10} />
+        </>
     )
 }

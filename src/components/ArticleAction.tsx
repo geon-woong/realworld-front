@@ -1,6 +1,7 @@
 import { useNavigate,useParams } from "react-router"
 import { FavoriteButton } from "./FavoriteButton";
 import { FollowButton } from "./FollowButton";
+import { toast } from "react-toastify";
 
 export const ArticleAction = ({isUser,slug,removeArticle,author,favorited,favoritesCount}) =>{
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ export const ArticleAction = ({isUser,slug,removeArticle,author,favorited,favori
                             try {
                                 removeArticle()
                                 navigate(-1)
+                                toast('succeed')
                             } catch (error) {
                                 
                             }

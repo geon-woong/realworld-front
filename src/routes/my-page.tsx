@@ -1,11 +1,9 @@
 import { useState,useEffect } from "react"
-import { isLoggedInAtom, userAtom } from "../atom"
-import { useRecoilState, useRecoilValue } from "recoil"
+import {  userAtom } from "../atom"
+import { useRecoilState } from "recoil"
 import { putUser } from "../api/users"
-import { useNavigate } from "react-router"
-import React from "react"
+import { toast } from 'react-toastify'
 export const MyPage =()=>{
-    const isLoggedIn = useRecoilValue(isLoggedInAtom);
     const [myInfo,setMyInfo] = useState({
         email: '',
         username:'',
@@ -14,7 +12,6 @@ export const MyPage =()=>{
     })
     const { email, username, bio, password} = myInfo;
     const [user, setUser] = useRecoilState(userAtom);
-    // const navigate = useNavigate();
 
     const onChange =(event)=>{
         const { value,name } = event.target 
@@ -26,7 +23,7 @@ export const MyPage =()=>{
 
     const onSubmit = async(event)=>{
         event.preventDefault();
-        const { data } = await putUser({
+        const { user } = await putUser({
             user : 
             {
                 username : username,
@@ -35,11 +32,11 @@ export const MyPage =()=>{
                 bio: bio
             }
         })
-        setUser(data.user)
+        setUser(user)
+        toast('Succeed')
     }
 
     useEffect(() => {
-        
         const initMy = ()=>{
             setMyInfo({
                 ...user,
@@ -47,7 +44,6 @@ export const MyPage =()=>{
             })
         }
         initMy()
-        // if (!isLoggedIn) navigate('/', { replace: true });
     }, [user])
     
     

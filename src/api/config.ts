@@ -23,7 +23,6 @@ const fetchWrapper = async({ method, url, body })=>{
         (method === 'put' && (await axios.put(url, body, config))) ||
         (method === 'delete' && (await axios.delete(url, config))) ||
         {};
-      console.log(data);
       return data;
     } catch (error) {
         throw error

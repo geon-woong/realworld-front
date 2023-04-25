@@ -23,3 +23,13 @@ export const feedToggle = atom({
     key: 'toggle',
     default: 1,
 })
+
+export const feedTag = atom({
+    key:'tag',
+    default:'',
+})
+
+export const modalAtom = atom({
+    key:'modal',
+    default: false
+})

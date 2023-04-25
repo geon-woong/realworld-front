@@ -6,6 +6,7 @@ import { ArticleAction } from "../components/ArticleAction";
 import { useRecoilValue } from "recoil";
 import { userAtom } from '../atom'
 import { Skeleton } from "../components/Skeleton";
+import { TagsList } from "../components/TagsList";
 export const Article = ()=>{
     const [article, setArticle] = useState({
         slug: '',
@@ -23,7 +24,7 @@ export const Article = ()=>{
           following: false,
         }
     });
-    const { author,favorited,favoritesCount } = article;
+    const { author,favorited,favoritesCount,tagList } = article;
     const { slug } = useParams();
     const currentUser = useRecoilValue(userAtom)
     const [isUser, setIsUser] = useState(false)
@@ -54,6 +55,8 @@ export const Article = ()=>{
                 {/* 팔로우 언팔로우 에딧 리뭅 */}
                 <ArticleAction isUser={isUser} author={author} favorited={favorited} favoritesCount={favoritesCount}  removeArticle={()=>removeArticle(slug)} slug={slug}  />
                 </div>
+                <TagsList tagList={tagList} clickable={false} />
+
             </div>
             <div className={`p-5 ${boundaryLine}`}>
                 {/* 설명 및 본문 */}
@@ -62,9 +65,7 @@ export const Article = ()=>{
                 </p>
                 <p>
                     {article.body}
-                    {/* 태그 */}
                 </p>
-                {/* 댓글 */}
             </div>
         </div>
         : <Skeleton height="h-full"/>}

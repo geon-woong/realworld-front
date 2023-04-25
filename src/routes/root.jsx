@@ -6,6 +6,8 @@ import { getUser } from '../api/users';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isLoggedInAtom,userAtom } from '../atom';
 import { SideBar } from '../components/SideBar';
+import { ToastContainer ,toast} from 'react-toastify'
+
 const Root = ()=>{
     /**
      * 로그인 상태
@@ -41,6 +43,18 @@ const Root = ()=>{
     return (
         <>
             <Header/>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             <div className="grid grid-cols-4 min-h-screen">
                 <div className="border-r bg-white border-black px-10 py-5">
                     <SideBar/>  

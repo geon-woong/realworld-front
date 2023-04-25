@@ -20,10 +20,11 @@ export const Feed = ({url,limit,query}:FeedProps) => {
     const [articles,setArticles] = useState<ArticleProps[]>([])
     const [articlesCount, setArticlesCount] = useState(0);
     const [page,setPage] = useRecoilState(pageAtom)
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const initFeed = async() =>{
-        const { articles } = await getArticles(
+        setIsLoading(true);
+        const { articles,articlesCount } = await getArticles(
             `${query}limit=${limit}&offset=${10 * (page - 1)}`
             );
         setArticles(articles);

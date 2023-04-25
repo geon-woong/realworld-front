@@ -3,28 +3,36 @@ import { createNewArticle } from "../api/article";
 import { useNavigate } from "react-router";
 import { useRecoilValue } from "recoil";
 import { isLoggedInAtom } from "../atom";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 export const CreateArticle = ()=>{
-    const isLoggedIn = useRecoilValue(isLoggedInAtom);
-    const navigate = useNavigate();
-    const [newArticle, setNewArticle] = useState({
-        title: '',
-        description:'',
-        body:'',
-    })
-    
-    const onChange = (event) => {
-        const { name,value } = event.target;
-        setNewArticle({
-            ...newArticle,
-            [name]: value,
-        })
-        console.log(newArticle);
+
+    interface INewArticle{
+        title: string,
+        description: string,
+        body: string,
     }
 
-    const onSubmit = async(event) =>{
-        event.preventDefault();
+    const isLoggedIn = useRecoilValue(isLoggedInAtom);
+    const navigate = useNavigate();
+    
+    const { register,handleSubmit,formState:{errors} } = useForm({
+        defaultValues:{
+            title: '',
+            description:'',
+            body: '',
+        }
+    })
+
+    const onSubmit = async(data: INewArticle) =>{
         try {
-            await createNewArticle({article:newArticle})
+            await createNewArticle({
+                article:{
+                    title: data.title,
+                    description: data.description,
+                    body: data.body,
+                }})
+            toast('New Article submit')
              navigate('/dashboard',{replace:true});
         } catch (error) {
             
@@ -40,11 +48,15 @@ export const CreateArticle = ()=>{
     return(
         <div className="form-container">
             <h1 className="page-title">Write New Article</h1>
-            <form action="submit" onSubmit={(event)=> onSubmit(event)}>
-                <input type="text" onChange={onChange} name="title" placeholder="Title" />
-                <input type="text" onChange={onChange} name="description" placeholder="Description"/>
-                <input type="text" onChange={onChange} name="body" placeholder="Article body" />
-                <button type="submit" onClick={event=>onSubmit(event)}>Submit</button>
+            <form action="submit" onSubmit={handleSubmit(onSubmit)}>
+                <input type="text" {...register('title',{required:'title is required'})} name="title" placeholder="Title" />
+                <p className="text-xs text-red-600 font-semibold">{errors.title?.message}</p>
+
+                <input type="text" {...register('description',{required:'description is required'})} name="description" placeholder="Description"/>
+                <p className="text-xs text-red-600 font-semibold">{errors.description?.message}</p>
+                <textarea {...register('body',{required:'body is required'})} name="body" placeholder="Article body" />
+                <p className="text-xs text-red-600 font-semibold">{errors.body?.message}</p>
+                <button type="submit" onClick={handleSubmit(onSubmit)}>Submit</button>
             </form>
         </div>
     )

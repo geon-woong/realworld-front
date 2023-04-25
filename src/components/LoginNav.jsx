@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userAtom,isLoggedInAtom } from "../atom";
-
+import { toast } from "react-toastify";
 const LoginNav = ()=>{
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom);
     const [user, setUser] = useRecoilState(userAtom);
@@ -10,6 +10,7 @@ const LoginNav = ()=>{
         setIsLoggedIn(false);
         localStorage.removeItem('jwtToken');
         setUser({ email: '', username: '', bio: '', image: '' });
+        toast('Logged Out!')
         navigate('/',{replace:true})
     }
     

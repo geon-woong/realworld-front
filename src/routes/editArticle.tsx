@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react";
 import { useParams } from "react-router"
 import { getArticle,editArticle } from "../api/article";
+import { toast } from "react-toastify";
 export const EditArticle = ()=>{
     const { slug } = useParams();
     const [article, setArticle] = useState({
@@ -14,6 +15,7 @@ export const EditArticle = ()=>{
             try {
                 const { article } = await getArticle(slug);
                  setArticle(article)
+                 toast('succeed')
             } catch (error) {
             }
         }

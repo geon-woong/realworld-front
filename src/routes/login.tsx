@@ -3,7 +3,7 @@ import { useNavigate,Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUser } from "../api/users";
 import { isLoggedInAtom,userAtom } from "../atom";
-
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const Login =()=>{
@@ -41,6 +41,7 @@ const Login =()=>{
             localStorage.setItem('jwtToken', user.token);
             setIsLoggedIn(true);
             setUser(user)
+            toast('Logged in')
             navigate('/'),{replace:true}
         } catch (error) {
             const errorMessage = error.response.data.errors
