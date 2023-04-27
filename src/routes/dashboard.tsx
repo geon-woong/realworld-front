@@ -42,7 +42,7 @@ useEffect(() => {
 
     return(
         <>
-            <TagsList tagList={tagList} clickable={true}  />
+            <TagsList tagList={tagList} clickable={true} />
             <Feed query={queryList[toggle]} url='/dashboard' limit={10} />
         </>
     )

@@ -15,7 +15,6 @@ export const EditArticle = ()=>{
             try {
                 const { article } = await getArticle(slug);
                  setArticle(article)
-                 toast('succeed')
             } catch (error) {
             }
         }
@@ -24,13 +23,18 @@ export const EditArticle = ()=>{
 
     const onSubmit = async(event)=>{
         event.preventDefault();
-        const { data } = await editArticle(slug,{
-            article : {
-                title : title,
-                description : description,
-                body : body,
-            }
-        })
+        try {
+            await editArticle(slug,{
+                article : {
+                    title : title,
+                    description : description,
+                    body : body,
+                }
+            })
+        toast('Succeed')            
+        } catch (error) {
+            
+        }
     }
     const onChange = (event)=>{
         const { name, value } = event.target;

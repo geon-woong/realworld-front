@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { getArticles } from '../api/article';
-import { isLoggedInAtom, pageAtom } from '../atom';
+import {  pageAtom } from '../atom';
 import { ArticleProps } from '../types';
 import { ArticleView } from './ArticleView';
 import { Pagenation } from './Pagination';
@@ -16,7 +16,6 @@ interface FeedProps{
     query:string,
 }
 export const Feed = ({url,limit,query}:FeedProps) => {
-    const isLoggedIn = useRecoilValue(isLoggedInAtom)
     const [articles,setArticles] = useState<ArticleProps[]>([])
     const [articlesCount, setArticlesCount] = useState(0);
     const [page,setPage] = useRecoilState(pageAtom)
@@ -34,8 +33,8 @@ export const Feed = ({url,limit,query}:FeedProps) => {
 
     useEffect(() => {
         initFeed();
-        
-    }, [page,limit,query])
+        setPage(1)
+    }, [setPage,limit,query])
 
     return (
         <div 
@@ -44,9 +43,11 @@ export const Feed = ({url,limit,query}:FeedProps) => {
             {
                 isLoading  ?
                 <Skeleton height="min-h-screen"/> 
-                :articles.map((article)=>(
+                : articles.length > 0 
+                ? articles.map((article)=>(
                 <ArticleView  article={article} key={article.slug} />
                 ))
+                : <p>There's No article</p>
             }
             <Pagenation articlesCount={articlesCount} url={url} />
         </div>

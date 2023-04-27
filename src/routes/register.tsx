@@ -1,34 +1,38 @@
 import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../api/users'
 import { isLoggedInAtom,userAtom } from '../atom'
-import {  useRecoilState } from 'recoil'
+import {  useRecoilState, useSetRecoilState } from 'recoil'
 import { useEffect } from 'react'
 import { useForm} from 'react-hook-form'
-
+import { AuthUser } from '../types'
+import { toast } from 'react-toastify'
 const Register = ()=>{
     const navigate = useNavigate();
     const { register, handleSubmit,formState:{errors} } = useForm({
-        username: '',
-        email: '',
-        password: '',
+        defaultValues:{
+            username: '',
+            email: '',
+            password: '',
+        }
     })
    
     const [isLoggedIn,setIsLoggedIn] = useRecoilState(isLoggedInAtom);
-    const [setUser] = useRecoilState(userAtom);
+    const setUser = useSetRecoilState(userAtom);
 
-    const onSubmit = async()=>{
+    const onSubmit = async(data:AuthUser)=>{
         try {
             const { user } = await registerUser({
                 user: {
-                    username: username,
-                    email: email,
-                    password: password,
+                    username: data.username,
+                    email: data.email,
+                    password: data.password,
                 }
             })
             setIsLoggedIn(true)
             setUser(user);
             navigate('/', { replace: true });
             localStorage.setItem('jwtToken', user.token);
+            toast(`Welcome ${user.username}`);
         } catch (error) {
             console.log(error)
         }

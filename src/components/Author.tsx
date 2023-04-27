@@ -1,16 +1,17 @@
-import { useState,useEffect } from "react";
+import { useState, } from "react";
+import { Link } from "react-router-dom";
+import { Feed } from "./Feed";
 export const Author = ({author}) => {
-    const [_author, setAuthor] = useState({
-        username:'',
-        image:'',
-        bio:'',
-        following:false,
-    })
+   
+
+    const { username,image } = author;
 
     return (
         <div className="flex gap-2">
-            <img src={author.image} alt="profile-image" className="rounded-full w-8 h-8" />
-            <p className="leading-[2rem]" >{author.username}</p>
+            <img src={image} alt="profile-image" className="rounded-full w-8 h-8" />
+            <Link to={`/profile/${username}`} className="leading-[2rem] font-semibold inline-block hover:underline">
+                {username}
+            </Link>
         </div>
     )
 }

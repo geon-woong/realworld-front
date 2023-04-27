@@ -5,11 +5,11 @@ import { favoriteArticle,unfavoriteArticle } from '../api/article'
 import { isLoggedInAtom } from '../atom';
 
 interface FavoriteBtnProps{
-    slug: string,
+    username: string,
     favorite: boolean,
     favoritesCount? : number,
 }
-export const FavoriteButton = ( {slug , favorite, favoritesCount }: FavoriteBtnProps ) => {
+export const FavoriteButton = ( {username , favorite, favoritesCount }: FavoriteBtnProps ) => {
     const [isFavorite, setIsFavorite] = useState(favorite);
     const [favoritesCounts, setFavoritesCount] = useState(favoritesCount);
     const isLoggedIn = useRecoilValue(isLoggedInAtom)
@@ -20,7 +20,7 @@ export const FavoriteButton = ( {slug , favorite, favoritesCount }: FavoriteBtnP
             navigate('/login')
             return
         }
-        favoriteArticle(slug)
+        favoriteArticle(username)
         setFavoritesCount(favoritesCount + 1)
     }
     
@@ -29,7 +29,7 @@ export const FavoriteButton = ( {slug , favorite, favoritesCount }: FavoriteBtnP
             navigate('/login')
             return
         }
-        unfavoriteArticle(slug)
+        unfavoriteArticle(username)
         setFavoritesCount(favoritesCount - 1)
     }
 
