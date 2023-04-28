@@ -1,7 +1,5 @@
 export const Footer = () => {
     return(
-        <div className="border-t border-black p-5">
-            footer
-        </div>
+        <footer className="border-t border-black p-10"/>
     )
 }

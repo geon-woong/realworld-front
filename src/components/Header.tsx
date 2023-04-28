@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { LogoutNav } from "./LogoutNav";
 import { LoginNav } from "./LoginNav";
-import { isLoggedInAtom, userAtom } from '../atom'
+import { isLoggedInAtom } from '../atom'
 import { useRecoilValue } from "recoil";
 const Header = ()=>{
 
@@ -10,7 +10,7 @@ const Header = ()=>{
     return(
         <nav className="flex justify-between px-10 py-5 border-b border-black">
                 <div className="text-black underline-none">
-                    <Link to="/">RealWorld</Link>
+                    <Link to="/dashboard">RealWorld</Link>
                 </div>
                 <ul className="flex gap-3">
                     {

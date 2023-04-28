@@ -8,11 +8,9 @@ import { Skeleton } from "../components/Skeleton";
 export const Profile = ()=>{
     const { username } = useParams();
     const [profile, setProfile] = useState({
-        profile: {
-            usename: '',
+            username: '',
             bio:'',
-            followng:'',
-        }
+            following:false,
     })
     const [ loading, setLoading ] = useState(false)
     const fetchProfile = async (username:string) => {

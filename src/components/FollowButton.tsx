@@ -43,8 +43,8 @@ export const FollowButton = ( {username , following }: FollowBtnProps ) => {
                 e.preventDefault()
                 setFollowing(!isFollowing)
                 isFollowing ?
-                postFollow() :
-                postUnfollow()
+                postUnfollow() :
+                postFollow()
             }
         }
               >

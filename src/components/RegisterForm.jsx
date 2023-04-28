@@ -1,3 +1,0 @@
-const RegisterForm = ()=>{
-}
-export { RegisterForm };

@@ -6,7 +6,7 @@ import { isLoggedInAtom,userAtom } from "../atom";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
-const Login =()=>{
+const LoginForm =()=>{
 
     interface Ilogin{
         email: string,
@@ -42,7 +42,6 @@ const Login =()=>{
             setIsLoggedIn(true);
             setUser(user)
             toast('Logged in')
-            navigate('/'),{replace:true}
         } catch (error) {
             const errorMessage = error.response.data.errors
             setError({
@@ -73,4 +72,4 @@ const Login =()=>{
     )
 }
 
-export { Login };
+export { LoginForm };

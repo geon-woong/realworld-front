@@ -25,7 +25,7 @@ export const ArticleAction = ({isUser,slug,removeArticle,author,favorited,favori
                 </>
             }
             <FollowButton username={author.username} following={author.following} />
-            <FavoriteButton  slug={slug} favorite={favorited} favoritesCount={favoritesCount} />
+            <FavoriteButton  username={slug} favorite={favorited} favoritesCount={favoritesCount} />
         </div>
     )
 }

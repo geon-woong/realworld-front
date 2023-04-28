@@ -1,6 +1,4 @@
-import { useState, } from "react";
 import { Link } from "react-router-dom";
-import { Feed } from "./Feed";
 export const Author = ({author}) => {
    
 

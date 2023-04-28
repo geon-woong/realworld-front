@@ -2,9 +2,15 @@ import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilState,useSetRecoilState } from 'recoil';
 import { feedTag, feedToggle } from '../atom';
-export const TagsList = ( {tagList, clickable } )=>{
+
+interface ITagListProps{
+    tagList : string[];
+    clickable? : boolean;
+}
+
+export const TagsList = ( {tagList, clickable }:ITagListProps )=>{
     const [tagNm,setTagNm] = useRecoilState(feedTag);
-    const [toggle,setToggle] = useRecoilState(feedToggle);
+    const setToggle = useSetRecoilState(feedToggle);
     const [disabled,setDisabled] = useState(false);
 
     useEffect(() => {

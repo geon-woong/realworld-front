@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { pageAtom } from "../atom";
 import { Link } from 'react-router-dom'

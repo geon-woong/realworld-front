@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { getArticles } from '../api/article';
-import {  pageAtom } from '../atom';
+import { pageAtom } from '../atom';
 import { ArticleProps } from '../types';
 import { ArticleView } from './ArticleView';
 import { Pagenation } from './Pagination';
@@ -32,9 +32,12 @@ export const Feed = ({url,limit,query}:FeedProps) => {
     }
 
     useEffect(() => {
+        setPage(1);
+      }, [setPage, query]);
+    
+    useEffect(() => {
         initFeed();
-        setPage(1)
-    }, [setPage,limit,query])
+    }, [page,limit,query])
 
     return (
         <div 

@@ -11,6 +11,7 @@ export const userAtom = atom({
         email : '',
         username : '',
         bio:'',
+        image:'',
     }
 })
 
@@ -27,9 +28,4 @@ export const feedToggle = atom({
 export const feedTag = atom({
     key:'tag',
     default:'',
-})
-
-export const modalAtom = atom({
-    key:'modal',
-    default: false
 })

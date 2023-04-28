@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { userAtom,isLoggedInAtom } from "../atom";
 import { toast } from "react-toastify";
 const LoginNav = ()=>{
-    const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom);
-    const [user, setUser] = useRecoilState(userAtom);
+    const setIsLoggedIn = useSetRecoilState(isLoggedInAtom);
+    const setUser = useSetRecoilState(userAtom);
     const navigate = useNavigate()
     const onLogout = ()=>{
         setIsLoggedIn(false);

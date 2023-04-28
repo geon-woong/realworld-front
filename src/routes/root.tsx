@@ -6,8 +6,8 @@ import { getUser } from '../api/users';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isLoggedInAtom,userAtom } from '../atom';
 import { SideBar } from '../components/SideBar';
-import { ToastContainer ,toast} from 'react-toastify'
-import { Introducing } from '../components/Introducing';
+import { ToastContainer } from 'react-toastify'
+import { LoginForm } from '../components/Login';
 
 const Root = ()=>{
     /**
@@ -41,7 +41,7 @@ const Root = ()=>{
 
     useEffect(()=>{
         init();
-        navigate('/dashboard')
+        // navigate('/dashboard')
     },[setIsLoggedIn,setUser])
 
     return (
@@ -65,9 +65,11 @@ const Root = ()=>{
                 </div>
                 <div className="col-span-3">
                     {
-                        currentPath === '/' ?
-                        <Introducing /> :
-                        <Outlet/>
+                        currentPath != "/" ?
+                        <Outlet/> :
+                        <p className="p-10 font-bold text-lg">
+                         banner
+                        </p>
                     }
                 </div>
             </div>

@@ -2,7 +2,6 @@ import {
     GET,
     POST,
     PUT,
-    DELETE,
 } from './config';
 import { AuthUser,User } from '../types';
 

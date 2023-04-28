@@ -31,11 +31,12 @@ const fetchWrapper = async({ method, url, body })=>{
 
 const GET = (url: string) => fetchWrapper({ method: 'get', url, body:{} });
 
-const POST = (url: string, body : {}, config? : {}) => fetchWrapper({method: 'post', url, body});
+const POST = (url: string, body? : {}, config? : {}) => fetchWrapper({method: 'post', url, body});
 
 const PUT = (url: string,body? : {}, config? : {})=> fetchWrapper({method:'put', url , body})
 
-const DELETE = (url: string, config? :{})=> fetchWrapper({method:'delete',url})
+const DELETE = (url: string, body? : {}, config? :{})=> fetchWrapper({method: 'delete', url, body})
+
 export { 
     GET,
     POST,
