@@ -3,33 +3,29 @@ import {  userAtom } from "../atom"
 import { useRecoilState } from "recoil"
 import { putUser } from "../api/users"
 import { toast } from 'react-toastify'
+import { useForm } from "react-hook-form"
 export const MyPage =()=>{
-    const [myInfo,setMyInfo] = useState({
-        email: '',
-        username:'',
-        bio:'',
-        password:'',
-    })
-    const { email, username, bio, password} = myInfo;
+  
     const [user, setUser] = useRecoilState(userAtom);
+    const { email, username, bio } = user;
+    const { register,handleSubmit,reset} = useForm({
+        defaultValues:{
+            email:email,
+            username:username,
+            bio:bio,
+            password:''
+        }
+    })
 
-    const onChange =(event)=>{
-        const { value,name } = event.target 
-        setMyInfo({
-            ...myInfo,
-            [name]: value
-        })
-    }
 
-    const onSubmit = async(event)=>{
-        event.preventDefault();
+    const onSubmit = async(data)=>{
         const { user } = await putUser({
             user : 
             {
-                username : username,
-                email: email,
-                password:password,
-                bio: bio
+                username : data.username,
+                email: data.email,
+                password:data.password,
+                bio: data.bio
             }
         })
         setUser(user)
@@ -37,13 +33,12 @@ export const MyPage =()=>{
     }
 
     useEffect(() => {
-        const initMy = ()=>{
-            setMyInfo({
-                ...user,
-                password:''
-            })
-        }
-        initMy()
+        reset({
+            email: email,
+            username: username,
+            bio: bio,
+            password: "",
+        })
     }, [user])
     
     
@@ -51,11 +46,11 @@ export const MyPage =()=>{
     return(
         <div className="form-container">
         <h1 className="page-title">Edit My Info</h1>
-                <form onSubmit={onSubmit} >
-                    <input onChange={onChange} value={email} type="email" name="email" placeholder="ID" />
-                    <input onChange={onChange} value={username} type="text" name="username" placeholder="put your name" />
-                    <input onChange={onChange} value={bio || ''} type="textarea" name="bio" placeholder="bio" className="min-h-[50px]" />
-                    <input onChange={onChange} value={password} type="password" name="password" placeholder="password" />
+                <form onSubmit={handleSubmit(onSubmit)} >
+                    <input {...register("email",{required:"email is required"})}  type="email" name="email" placeholder="ID" />
+                    <input {...register("username",{required:"username is required"})} type="text" name="username" placeholder="put your name" />
+                    <input {...register("bio")}  type="textarea" name="bio" placeholder="bio" className="min-h-[50px]" />
+                    <input {...register("password")} type="password" name="password" placeholder="password" />
                     <button type="submit" >submit</button>
                 </form>
         </div>
