@@ -2,8 +2,9 @@ import { useState,useEffect,useMemo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { getArticleTags } from "../api/article";
 import { feedTag, feedToggle, isLoggedInAtom } from "../atom";
-import { TagsList } from "../components/TagsList";
-import { Feed } from "../components/Feed";
+import { TagsList } from "./TagsList";
+import { Feed } from "./Feed";
+
 export const DashBoard = ()=>{
 /**
  * 로그인 상태
@@ -43,7 +44,7 @@ useEffect(() => {
     return(
         <>
             <TagsList tagList={tagList} clickable={true} />
-            <Feed query={queryList[toggle]} url='/dashboard' limit={10} />
+            <Feed query={queryList[toggle]} url='/' limit={10} />
         </>
     )
 }

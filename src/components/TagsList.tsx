@@ -27,7 +27,7 @@ export const TagsList = ( {tagList, clickable }:ITagListProps )=>{
                     }} className={`
                     ${disabled && (tagNm === tag && "bg-slate-600 text-white")}
                     border rounded-md p-1`}
-                    to={disabled && '/dashboard'}
+                    to={disabled && '/'}
                     >{tag}</Link>)
             }
         </div>

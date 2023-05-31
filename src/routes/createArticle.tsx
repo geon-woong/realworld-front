@@ -33,7 +33,7 @@ export const CreateArticle = ()=>{
                     body: data.body,
                 }})
             toast('New Article submit')
-             navigate('/dashboard',{replace:true});
+             navigate('/',{replace:true});
         } catch (error) {
             
         }

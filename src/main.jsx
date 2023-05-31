@@ -9,7 +9,6 @@ import { Login } from './routes/login'
 import { Register } from './routes/register'
 import { ErrorPage } from './routes/error-page'
 import { MyPage } from './routes/my-page';
-import { DashBoard } from './routes/dashboard';
 import { Article } from './routes/article';
 import { CreateArticle } from './routes/createArticle';
 import { Profile } from './routes/profile';
@@ -28,10 +27,7 @@ const router = createBrowserRouter([
         path: '/register',
         element: <Register />,
       },
-      {
-        path: '/dashboard',
-        element: <DashBoard/>
-      },
+      
       {
         path: '/mypage',
         element: <MyPage/>
