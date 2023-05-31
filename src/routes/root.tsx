@@ -1,14 +1,10 @@
-import  { Header } from '../components/Header'
-import { Footer } from '../components/Footer';
-import { Outlet, useNavigate } from 'react-router';
-import { useEffect } from 'react';
+import { Outlet,  } from 'react-router';
+import { useEffect, } from 'react';
 import { getUser } from '../api/users';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { feedTag, feedToggle, isLoggedInAtom,userAtom } from '../atom';
-import { SideBar } from '../components/SideBar';
+import { isLoggedInAtom,userAtom } from '../atom';
 import { ToastContainer } from 'react-toastify'
-import { DashBoard } from '../components/Dashboard';
-import { Layout } from '../Layout';
+import { Layout } from '../layout';
 const Root = ()=>{
     /**
      * 로그인 상태
@@ -20,7 +16,6 @@ const Root = ()=>{
      */
     const setUser = useSetRecoilState(userAtom);
 
-    const currentPath = window.location.pathname;
     /**
      * 초기화 
      */
@@ -55,9 +50,9 @@ const Root = ()=>{
                 theme="colored"
             />
             <Layout>
-                  <Outlet/>
+                <Outlet/>
             </Layout>
-            
+
         </>
     )
 }
