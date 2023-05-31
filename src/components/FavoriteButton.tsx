@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { favoriteArticle,unfavoriteArticle } from '../api/article'
@@ -15,22 +15,19 @@ export const FavoriteButton = ( {username , favorite, favoritesCount }: Favorite
     const isLoggedIn = useRecoilValue(isLoggedInAtom)
     const navigate = useNavigate()
 
+    useEffect(() => {
+        setFavoritesCount(favoritesCounts)
+    }, [favoritesCounts])
+
     const postFavoriteArticle = async()=>{
-        if(!isLoggedIn){
-            navigate('/login')
-            return
-        }
         favoriteArticle(username)
-        setFavoritesCount(favoritesCount + 1)
+        setFavoritesCount(favoritesCounts + 1)
     }
     
     const postUnfavoriteArticle = async()=>{
-        if(!isLoggedIn){
-            navigate('/login')
-            return
-        }
+       
         unfavoriteArticle(username)
-        setFavoritesCount(favoritesCount - 1)
+        setFavoritesCount(favoritesCounts - 1)
     }
 
     return(
@@ -45,7 +42,7 @@ export const FavoriteButton = ( {username , favorite, favoritesCount }: Favorite
               }
         onClick={
             (e)=>{
-                e.preventDefault()
+                if(!isLoggedIn) navigate('/login')
                 setIsFavorite(!isFavorite)
                 isFavorite ?
                 postUnfavoriteArticle() :
@@ -55,7 +52,7 @@ export const FavoriteButton = ( {username , favorite, favoritesCount }: Favorite
               >
             { isFavorite ? 'Unfavorite' : 'Favorite' }
             <span className="px-1">
-                {/* { !!favoritesCounts } */}
+                {favoritesCounts}
             </span>
         </button>
 

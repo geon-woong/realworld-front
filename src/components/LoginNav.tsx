@@ -17,6 +17,9 @@ const LoginNav = ()=>{
     return(
         <>
             <li>
+                <Link to="/create">New article</Link>
+            </li>
+            <li>
                 <Link to="/mypage" className=" px-2 truncate">MyPage</Link>
             </li>
             <li>

@@ -10,7 +10,7 @@ const Header = ()=>{
     return(
         <nav className="flex justify-between px-10 py-5 border-b border-black">
                 <div className="text-black underline-none">
-                    <Link to="/dashboard">RealWorld</Link>
+                    <Link to="/">RealWorld</Link>
                 </div>
                 <ul className="flex gap-3">
                     {

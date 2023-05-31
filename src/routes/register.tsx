@@ -41,8 +41,8 @@ const Register = ()=>{
             console.log(e.response.data.errors.email)
             const errorMessage = e.response.data.errors
             setError({
-                email: errorMessage.email,
-                username: errorMessage.username
+                email: `email ${errorMessage.email}`,
+                username: `username ${errorMessage.username}`,
             })
         }
     };
@@ -71,8 +71,8 @@ const Register = ()=>{
                 <p className="text-xs text-red-600 font-semibold">{errors.email?.message}</p>
                 <input {...register("password",{ required: "password is required"})} type="password" name="password" placeholder="password" />
                 <p className="text-xs text-red-600 font-semibold">{errors.password?.message}</p>
-                <p className="text-xs text-red-600 font-semibold"> email { error.email }</p>
-                <p className="text-xs text-red-600 font-semibold"> username { error.username }</p>
+                <p className="text-xs text-red-600 font-semibold">{ error.email }</p>
+                <p className="text-xs text-red-600 font-semibold">{ error.username }</p>
                 <button type="submit"  className="p-2 border rounded-xl bg-gray-700 text-white">join</button>
             </form>
         </div>
