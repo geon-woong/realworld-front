@@ -4,7 +4,6 @@ import { RecoilRoot } from 'recoil';
 import './index.css'
 import { RouterProvider } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-
 import { router } from './routes/routes'
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
-import { useRecoilState, useRecoilValue,useSetRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { feedTag, feedToggle, isLoggedInAtom } from "../atom"
-import { TagsList } from "./TagsList"
 
 export const SideBar = () =>{
     const isLoggedIn = useRecoilValue(isLoggedInAtom)
@@ -42,6 +41,7 @@ export const SideBar = () =>{
                         setTag('')
                         setToggle(1)
                     }}>
+
                 { !!tag && `#${tag}`}
             </p>
         </div>

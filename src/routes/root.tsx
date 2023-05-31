@@ -4,7 +4,7 @@ import { getUser } from '../api/users';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isLoggedInAtom,userAtom } from '../atom';
 import { ToastContainer } from 'react-toastify'
-import { Layout } from '../layout';
+import { Layout } from '../Layout/index'
 const Root = ()=>{
     /**
      * 로그인 상태
@@ -52,7 +52,6 @@ const Root = ()=>{
             <Layout>
                 <Outlet/>
             </Layout>
-
         </>
     )
 }
