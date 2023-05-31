@@ -1,0 +1,14 @@
+{
+    "rewrites":  [
+      {"source": "/(.*)", "destination": "/"}
+    ],
+    "routes": [
+        { "src": "/login", "dest": "./routes/login" },
+        { "src": "/register", "dest": "./routes/register" },
+        { "src": "/mypage", "dest": "./routes/my-page" },
+        { "src": "/profile", "dest": "./routes/profile" },
+        { "src": "/article", "dest": "./routes/article" },
+        { "src": "/create", "dest": "./routes/createArticle" },
+        { "src": "/edit", "dest": "./routes/editArticle" }
+      ]
+  }
