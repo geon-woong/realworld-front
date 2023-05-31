@@ -18,7 +18,7 @@ export const SideBar = () =>{
                         setTag('')
                     }
              }
-             className={ toggle && activeClass}
+            //  className={ toggle && activeClass}
              >
                Global Feed
             </Link>
@@ -31,7 +31,7 @@ export const SideBar = () =>{
                         setToggle(0)
                         setTag('')
                     }}
-                    className={ !toggle && activeClass}
+                    // className={ !toggle && activeClass}
                     
                     >My Feed</Link>
                 </>

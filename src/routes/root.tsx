@@ -8,7 +8,7 @@ import { feedTag, feedToggle, isLoggedInAtom,userAtom } from '../atom';
 import { SideBar } from '../components/SideBar';
 import { ToastContainer } from 'react-toastify'
 import { DashBoard } from '../components/Dashboard';
-
+import { Layout } from '../Layout';
 const Root = ()=>{
     /**
      * 로그인 상태
@@ -42,7 +42,6 @@ const Root = ()=>{
 
     return (
         <>
-            <Header/>
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -55,19 +54,10 @@ const Root = ()=>{
                 pauseOnHover
                 theme="colored"
             />
-            <div className="grid-none sm:grid grid-cols-1 sm:grid-cols-4 min-h-screen ">
-                <div className="border-r-none border-b sm:border-b-0 sm:border-r bg-white border-black px-10 py-5">
-                    <SideBar/>  
-                </div>
-                <div className="col-span-3">
-                    {
-                        currentPath === "/" ?
-                        <DashBoard/> : 
-                        <Outlet/> 
-                    }
-                </div>
-            </div>
-            <Footer/>
+            <Layout>
+                  <Outlet/>
+            </Layout>
+            
         </>
     )
 }
