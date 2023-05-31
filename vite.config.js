@@ -4,6 +4,6 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base:"https://realworld-woong.vercel.app/",
+  base:"https://geon-woong.github.io/realworld-front/",
 })
 
