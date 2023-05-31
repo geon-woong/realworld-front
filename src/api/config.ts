@@ -1,12 +1,7 @@
 import axios from 'axios'
 
 const jwtToken =localStorage.getItem('jwtToken');
-const instance = axios.create({
-    baseURL: 'https://api.realworld.io/api/',
-    headers: {
-        Authorization: !!jwtToken ? `Token ${jwtToken}` : 'No Token',
-    },
-})
+
 
 const fetchWrapper = async({ method, url, body })=>{
     const jwtToken =localStorage.getItem('jwtToken');

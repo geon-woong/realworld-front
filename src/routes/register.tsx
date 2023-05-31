@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../api/users'
 import { isLoggedInAtom,userAtom } from '../atom'
 import {  useRecoilState, useSetRecoilState } from 'recoil'
-import { useEffect } from 'react'
+import { useEffect,useState } from 'react'
 import { useForm} from 'react-hook-form'
 import { AuthUser } from '../types'
 import { toast } from 'react-toastify'
@@ -17,6 +17,10 @@ const Register = ()=>{
     })
    
     const [isLoggedIn,setIsLoggedIn] = useRecoilState(isLoggedInAtom);
+    const [error, setError] = useState({
+        email: '',
+        username:'',
+    })
     const setUser = useSetRecoilState(userAtom);
 
     const onSubmit = async(data:AuthUser)=>{
@@ -33,8 +37,13 @@ const Register = ()=>{
             navigate('/', { replace: true });
             localStorage.setItem('jwtToken', user.token);
             toast(`Welcome ${user.username}`);
-        } catch (error) {
-            console.log(error)
+        } catch (e) {
+            console.log(e.response.data.errors.email)
+            const errorMessage = e.response.data.errors
+            setError({
+                email: errorMessage.email,
+                username: errorMessage.username
+            })
         }
     };
     
@@ -62,6 +71,8 @@ const Register = ()=>{
                 <p className="text-xs text-red-600 font-semibold">{errors.email?.message}</p>
                 <input {...register("password",{ required: "password is required"})} type="password" name="password" placeholder="password" />
                 <p className="text-xs text-red-600 font-semibold">{errors.password?.message}</p>
+                <p className="text-xs text-red-600 font-semibold"> email { error.email }</p>
+                <p className="text-xs text-red-600 font-semibold"> username { error.username }</p>
                 <button type="submit"  className="p-2 border rounded-xl bg-gray-700 text-white">join</button>
             </form>
         </div>
