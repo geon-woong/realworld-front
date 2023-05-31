@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { userAtom,isLoggedInAtom } from "../atom";
 import { toast } from "react-toastify";
@@ -17,10 +17,19 @@ const LoginNav = ()=>{
     return(
         <>
             <li>
-                <Link to="/create">New article</Link>
+                <NavLink 
+                className={({ isActive, isPending }) =>
+                 isPending ? "font-thin" : isActive ? "font-bold" : ""
+                    }
+                
+                to="/create">New article</NavLink>
             </li>
             <li>
-                <Link to="/mypage" className=" px-2 truncate">MyPage</Link>
+                <NavLink 
+                className={({ isActive, isPending }) =>
+                 isPending ? "font-thin" : isActive ? "font-bold" : ""
+                }
+                to="/mypage">MyPage</NavLink>
             </li>
             <li>
                 <button onClick={onLogout}>Log Out</button>

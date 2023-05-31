@@ -18,7 +18,7 @@ export const SideBar = () =>{
                         setTag('')
                     }
              }
-            //  className={ toggle && activeClass}
+             className={ toggle && activeClass}
              >
                Global Feed
             </Link>
@@ -31,12 +31,17 @@ export const SideBar = () =>{
                         setToggle(0)
                         setTag('')
                     }}
-                    // className={ !toggle && activeClass}
+                    className={ !toggle && activeClass}
                     
                     >My Feed</Link>
                 </>
                 }
-            <p className="font-bold text-gray-500 hover:line-through cursor-pointer" onClick={()=>setTag('')}>
+            <p className="font-bold text-gray-500 hover:line-through cursor-pointer" 
+                onClick={
+                    ()=>{
+                        setTag('')
+                        setToggle(1)
+                    }}>
                 { !!tag && `#${tag}`}
             </p>
         </div>

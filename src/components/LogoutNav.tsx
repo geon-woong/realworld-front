@@ -5,10 +5,18 @@ const LogoutNav = ()=>{
     return(
         <>
             <li>
-                <NavLink to="/login">Sign In</NavLink>
+                <NavLink 
+                className={({ isActive, isPending }) =>
+                 isPending ? "font-thin" : isActive ? "font-bold" : ""
+                }
+                to="/login">Sign In</NavLink>
             </li>
             <li>
-                <NavLink to="/register">Sign Up</NavLink>
+                <NavLink 
+                className={({ isActive, isPending }) =>
+                 isPending ? "font-thin" : isActive ? "font-bold" : ""
+                }
+                to="/register">Sign Up</NavLink>
             </li>
         </>
     )
